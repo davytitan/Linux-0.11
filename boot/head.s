@@ -21,7 +21,7 @@ startup_32:
 	mov %ax,%es
 	mov %ax,%fs
 	mov %ax,%gs
-	lss stack_start,%esp
+	lss stack_start,%esp   # 这里已经是32位模式了，lss指令：加载32位到  esp, 再加载 16位到 ss, 这里也对应着sched.c里面定义的stack_start结构体的定义，低位32位：一个void(long) *，然后一个16位short dao ss(作为段选择子) 
 	call setup_idt
 	call setup_gdt
 	movl $0x10,%eax		# reload all the segment registers
